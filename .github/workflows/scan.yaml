@@ -46,7 +46,7 @@ jobs:
     container:
       image: alpine:3.22.1@sha256:4bcff63911fcb4448bd4fdacec207030997caf25e9bea4045fa6c8c44de311d1
     env:
-      SCAP_SECURITY_GUIDE_VERSION: "0.1.77"
+      SCAP_SECURITY_GUIDE_VERSION: "0.1.78"
       WOLFI_STIG_VERSION: "3.2.5"
       SSG_DIR: "ssg"
       TOOL: "openscap"
@@ -298,7 +298,7 @@ jobs:
         name: Check for results and make a stub if no vulnerabilities, otherwise process and make CSV.
         run: |
           set -eu
-          if grep -zoP '"matches": \[\],' ${{ env.OUTPUT_NAME }}.json; then
+          if grep -zoP '"matches":\[\],' ${{ env.OUTPUT_NAME }}.json; then
             echo "NO FINDINGS, CREATING STUB"
             echo 'Results Set,Status,ID,Title,Description,Descriptions,Impact,Severity,Code,Check,Fix,800-53 Controls,CCI IDs,Results,Waived,Waiver Data' > ${{ env.OUTPUT_NAME }}.csv
             echo "grype-results.hdf.json,Passed,Grype/CVE-0000-0000,No findings at this time,This is a stub file generated due to a lack of results from grype because zero CVEs were found.,,0,N/A,,,\"No fixes needed, good work.\",,,,FALSE," >> ${{ env.OUTPUT_NAME }}.csv
