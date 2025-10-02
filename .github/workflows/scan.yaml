@@ -1,4 +1,4 @@
-name: daily-build-and-scan
+name: on-push-build-and-scan
 
 on:
   push:
